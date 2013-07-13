@@ -12,12 +12,13 @@ public class HelloWorldClient {
   public static void main(String[] argv) {
       try {
           HelloWorldServiceLocator locator = new HelloWorldServiceLocator();
+          System.setProperty("javax.net.ssl.trustStore","C:\\Users\\joy\\.keystore");
           HelloWorld_PortType service = locator.getHelloWorld();
           // If authorization is required
           ((HelloWorldSoapBindingStub)service).setUsername("wsuser");
           ((HelloWorldSoapBindingStub)service).setPassword("wspwd");
           // invoke business method
-          String respnse = service.sayHelloWorldFrom("john");
+          String respnse = service.sayHelloWorldFrom("client call");
           System.out.println(respnse);
       } catch (javax.xml.rpc.ServiceException ex) {
           ex.printStackTrace();
